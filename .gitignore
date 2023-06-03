@@ -1,4 +1,5 @@
 word_doc/
+__pycache__/
 
 #Ignore all Word Docs
 *docx
