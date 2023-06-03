@@ -1,0 +1,1 @@
+Script to remove certain text from word document and also execute microsoft word macro
