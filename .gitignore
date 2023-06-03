@@ -1,0 +1,6 @@
+word_doc/
+
+#Ignore all Word Docs
+*docx
+
+paragraphs_to_delete.py
