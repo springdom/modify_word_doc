@@ -74,8 +74,12 @@ def run_word_macro():
         word_app.Quit()
 
 def main():
+    # Get the current directory of the script
+    script_directory = os.path.dirname(os.path.abspath(__file__))
+    # Change the current working directory
+    os.chdir(script_directory)
     # Load the document
-    orginal_doc_path = "word_doc\Course Design Guide AU Module 1.docx"
+    orginal_doc_path = "word_doc\Sample Course Design Guide AU Module 2.docx"
     modified_doc_path = "word_doc\modified_document.docx"
     doc = Document(orginal_doc_path)
 
