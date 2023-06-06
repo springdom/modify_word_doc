@@ -49,14 +49,13 @@ def delete_paragraphs_under_header(document, header_name):
             ):
                 break
 
-def run_word_macro():
+
+def run_word_macro(modified_file_name):
     # Create an instance of the Word application
     word_app = win32.gencache.EnsureDispatch("Word.Application")
-    sub_dir = "word_doc"
-    modified_file_name = "modified_document.docx"
-    modified_file_path = os.path.join(os.getcwd(), sub_dir, modified_file_name)
+    modified_file_path = os.path.join(os.getcwd(), modified_file_name)
 
-    print(modified_file_path)
+    print(modified_file_name)
     try:
         # Open the Word document
         doc = word_app.Documents.Open(modified_file_path)
@@ -73,14 +72,28 @@ def run_word_macro():
         # Quit the Word application
         word_app.Quit()
 
+
 def main():
     # Get the current directory of the script
     script_directory = os.path.dirname(os.path.abspath(__file__))
     # Change the current working directory
     os.chdir(script_directory)
-    # Load the document
-    orginal_doc_path = "word_doc\Sample Course Design Guide AU Module 2.docx"
-    modified_doc_path = "word_doc\modified_document.docx"
+
+    original_doc_filename = ""
+    orginal_doc_path = ""
+    modified_doc_path = ""
+
+    while True:
+        # Load the document
+        original_doc_filename = input("Enter the filename: ")
+        orginal_doc_path = os.path.join("word_doc", original_doc_filename + ".docx")
+
+        if os.path.exists(orginal_doc_path):
+            break
+        else:
+            print("File does not exist. Please try again")
+
+    modified_doc_path = os.path.splitext(orginal_doc_path)[0] + "_modified.docx"
     doc = Document(orginal_doc_path)
 
     # Specify the header name to delete everything under
@@ -97,7 +110,7 @@ def main():
     doc.save(modified_doc_path)
 
     # Call the function to run the Word macro
-    run_word_macro()
+    run_word_macro(modified_doc_path)
 
     os.startfile(modified_doc_path)
 
